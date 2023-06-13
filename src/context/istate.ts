@@ -6,6 +6,8 @@ interface IState {
     cart: CartItemType[];
     addProductToCard?: (product: ProductType) => void;
     removeCartItem?: (cartItem: CartItemType) => void;
+    addProduct?: (product: ProductType) => void;
+    removeProduct?: (product: ProductType) => void;
 }
 
 export default IState;

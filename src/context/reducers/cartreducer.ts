@@ -1,21 +1,17 @@
-import CartItemType from "../models/cartitem";
+import CartItemType from "../../models/cartitem";
+import cloneArray from "../../utilities/clonearray";
 
-const clone = (arr: any[]) => {
-    const newArr = [];
-    for (let i = 0; i < arr.length; i++) {
-        const newObj = {...arr[i]}
-        newArr.push(newObj);
-    }
-    return newArr;
+enum ActionType {
+    ADD_TO_CART = "ADD_TO_CART",
+    REMOVE_CARTITEM = "REMOVE_CARTITEM",
 }
 
-const reducer = (state: any, action: any) => {
+const cartReducer = (state: any, action: any) => {
     const { type, payload } = action;
-
-    const cart = clone(state.cart);
+    const cart = cloneArray(state.cart);
 
     switch (type) {
-        case "ADD_TO_CART": {
+        case ActionType.ADD_TO_CART: {
             const index = cart.findIndex((p: CartItemType) => p.id === payload.id);
             if (index !== -1) {
                 cart[index].quantity += 1;
@@ -31,7 +27,7 @@ const reducer = (state: any, action: any) => {
                 cart: cart,
             };
         }
-        case "REMOVE_CARTITEM":
+        case ActionType.REMOVE_CARTITEM:
             return {
                 ...state,
                 total: state.total - 1,
@@ -41,4 +37,5 @@ const reducer = (state: any, action: any) => {
     }
 }
 
-export default reducer;
+export default cartReducer;
+export { ActionType };

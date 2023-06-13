@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { Context } from "./context";
+import { Context } from "./appcontextprovider";
 
 const useAppContext = () => {
     const context = useContext(Context)
   
     if (context === undefined) {
-      throw new Error("useShop must be used within ShopContext")
+      throw new Error("useAppContext must be used within AppContext")
     }
   
     return context
